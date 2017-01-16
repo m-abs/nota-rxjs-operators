@@ -1,9 +1,10 @@
 {
   "name": "@nota/rxjs-operators",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of operators for rxjs used by @nota",
   "main": "index.js",
   "scripts": {
+    "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
