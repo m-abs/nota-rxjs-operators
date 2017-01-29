@@ -1,16 +1,31 @@
 {
   "name": "@nota/rxjs-operators",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A collection of operators for rxjs used by @nota",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "nota",
+    "url": "http://nota.dk"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Dam Freiling",
+      "email": "dfg@nota.dk"
+    },
+    {
+      "name": "Morten Anton Bach Sjøgren",
+      "url": "http://mabs.dk",
+      "email": "m_abs@mabs.dk"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
-    "rxjs": "^5.0.3"
+    "rxjs": "^5.0.0"
   },
   "devDependencies": {
     "ts-node": "^2.0.0",
