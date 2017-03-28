@@ -1,6 +1,6 @@
 {
   "name": "@nota/rxjs-operators",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A collection of operators for rxjs used by @nota",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
