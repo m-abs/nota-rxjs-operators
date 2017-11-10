@@ -24,11 +24,12 @@
     }
   ],
   "license": "MIT",
-  "dependencies": {
-    "rxjs": "^5.0.0"
+  "peerDependencies": {
+    "rxjs": "^5.5.0"
   },
   "devDependencies": {
+    "rxjs": "^5.5.0",
     "ts-node": "^2.0.0",
-    "typescript": "^2.1.5"
+    "typescript": "~2.4.0"
   }
 }

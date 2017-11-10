@@ -4,8 +4,11 @@ import 'rxjs/add/operator/buffer';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/take';
 
+/**
+ * Buffer the last {bufferCount} values while the pauser is true and emit them once it becomes false.
+ */
 export function pausableBuffered<T>(this: Observable<T>, pauser: Observable<boolean>, bufferCount?: number): Observable<T> {
-  const buffer = new Subject();
+  const buffer = new Subject<T[]>();
 
   let tmp = this.buffer(pauser);
 
@@ -15,11 +18,14 @@ export function pausableBuffered<T>(this: Observable<T>, pauser: Observable<bool
 
   tmp.subscribe(buffer);
 
-  return <Observable<T>>pauser.switchMap((paused) => paused ? buffer : this);
+  return pauser.switchMap((paused) => paused ? buffer : this);
 }
 
 declare module 'rxjs/Observable' {
   interface Observable<T> {
+    /**
+     * Buffer the last {bufferCount} values while the pauser is true and emit them once it becomes false.
+     */
     pausableBuffered: typeof pausableBuffered;
   }
 }

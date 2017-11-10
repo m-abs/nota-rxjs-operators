@@ -5,3 +5,4 @@ node_modules
 lib/
 *.tgz
 dist/
+package-lock.json
