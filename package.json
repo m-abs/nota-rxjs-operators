@@ -1,6 +1,6 @@
 {
   "name": "@nota/rxjs-operators",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A collection of operators for rxjs used by @nota",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -25,7 +25,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "rxjs": "^5.0.0"
+    "rxjs": "^5.5.0"
   },
   "devDependencies": {
     "ts-node": "^2.0.0",
