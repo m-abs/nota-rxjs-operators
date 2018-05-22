@@ -1,0 +1,12 @@
+{
+  "rulesDirectory": [
+    "node_modules/rxjs-tslint"
+  ],
+  "rules": {
+    "ordered-imports": true,
+    "rxjs-collapse-imports": true,
+    "rxjs-pipeable-operators-only": true,
+    "rxjs-no-static-observable-methods": true,
+    "rxjs-proper-imports": true
+  }
+}

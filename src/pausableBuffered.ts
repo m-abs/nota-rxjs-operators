@@ -1,63 +1,22 @@
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/buffer';
-import 'rxjs/add/operator/bufferCount';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/from';
+import { Observable, Subject } from 'rxjs';
+import { buffer, switchMap, take } from 'rxjs/operators';
 
 /**
  * Buffer the last {bufferCount} values while the pauser is true and emit them once it becomes false.
  */
-export function pausableBuffered<T>(this: Observable<T>, pauser: Observable<boolean>, bufferSize: number = 1): Observable<T> {
-  return new Observable((subscriber) => {
-    let isEnabled = false;
-    const closeBuffer = new Subject();
-    const bufferIn = new Subject<T>();
+export const pausableBuffered = (
+  pauser: Observable<boolean>,
+  bufferCount?: number,
+) => <T>(source: Observable<T>) => {
+  const subject = new Subject();
 
-    const bufferSubscript = bufferIn
-      .buffer(closeBuffer)
-      .bufferCount(bufferSize)
-      .switchMap((values) => Observable.from(values))
-      .subscribe((values) => {
-        values.forEach((val) => subscriber.next(val));
-      });
+  let tmp = source.pipe(buffer(pauser));
 
-    const pauserSubcription = pauser.subscribe((pause) => {
-      isEnabled = pause;
-      if (isEnabled) {
-        // flush buffer every when stream is enabled
-        closeBuffer.next(0);
-      }
-    });
-
-    const subscription = this.subscribe((value) => {
-        try {
-          if (isEnabled) {
-            subscriber.next(value);
-          } else {
-            bufferIn.next(value);
-          }
-        } catch(err) {
-          subscriber.error(err);
-        }
-      },
-      (err) => subscriber.error(err),
-      () => subscriber.complete());
-
-    return () => {
-      subscription.unsubscribe();
-      bufferSubscript.unsubscribe();
-      pauserSubcription.unsubscribe();
-    };
-  });
-}
-
-declare module 'rxjs/Observable' {
-  interface Observable<T> {
-    /**
-     * Buffer the last {bufferCount} values while the pauser is true and emit them once it becomes false.
-     */
-    pausableBuffered: typeof pausableBuffered;
+  if (bufferCount !== void 0) {
+    tmp = tmp.pipe(take(bufferCount));
   }
-}
+
+  tmp.subscribe(subject);
+
+  return pauser.pipe(switchMap((paused) => (paused ? subject : source)));
+};

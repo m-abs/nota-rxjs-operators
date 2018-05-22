@@ -1,40 +1,36 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/defer'
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/mergeAll'
+import {
+  defer,
+  Observable,
+  of,
+  throwError as observableThrowError,
+} from 'rxjs';
+import { map, mergeAll } from 'rxjs/operators';
 
 /**
  * Run a number of concurrent tasks the data in an observable and get the results in the original order.
  */
-export function concurrentMerge<T, O>(this: Observable<T>, cb: (val: T) => Observable<O> | Promise<O>, concurrent?: number): Observable<Array<O>> {
+export const concurrentMerge = <O>(
+  cb: (val: any) => Observable<O> | Promise<O>,
+  concurrent?: number,
+) => <T>(source: Observable<T>) => {
   return new Observable<O[]>((observer) => {
-    const worker = this.map((val: T, index: number) => {
-      return Observable.defer(() => cb(val)).map((res) => ({index, res}));
-    })
-    .mergeAll(concurrent);
+    const worker = source.pipe(
+      map((val: T, index: number) =>
+        defer(() => cb(val)).pipe(map((res) => ({ index, res }))),
+      ),
+      mergeAll(concurrent),
+    );
 
     const output = [] as Array<O>;
 
     return worker.subscribe(
-      ({index, res}) => {
+      ({ index, res }) => {
         output[index] = res;
       },
-      (err) => Observable.throw(err),
+      (err) => observableThrowError(err),
       () => {
-        Observable.of(output).subscribe(observer);
-      });
+        of(output).subscribe(observer);
+      },
+    );
   });
-}
-
-Observable.prototype.concurrentMerge = concurrentMerge;
-
-declare module 'rxjs/Observable' {
-  interface Observable<T> {
-    /**
-     * Run a number of concurrent tasks the data in an observable and get the results in the original order.
-     */
-    concurrentMerge: typeof concurrentMerge;
-  }
-}
+};

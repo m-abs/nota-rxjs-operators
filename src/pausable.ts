@@ -1,21 +1,10 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/never';
-import 'rxjs/add/operator/switchMap';
+import { never, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 /**
  * Skip value updates while the pauser have a true value
  */
-export function pausable<T>(this: Observable<T>, pauser: Observable<boolean>): Observable<T> {
-  return pauser.switchMap((paused) => paused ? Observable.never() : this);
-}
-
-Observable.prototype.pausable = pausable;
-
-declare module 'rxjs/Observable' {
-  interface Observable<T> {
-    /**
-     * Skip value updates while the pauser have a true value
-     */
-    pausable: typeof pausable;
-  }
-}
+export const pausable = (pauser: Observable<boolean>) => <T>(
+  source: Observable<T>,
+): Observable<T> =>
+  pauser.pipe(switchMap((paused) => (paused ? never() : source)));

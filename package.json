@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "prepublish": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prettier": "prettier --write --arrow-parens=always --tab-width 2 --trailing-comma all --single-quote src/**/*.ts"
   },
   "author": {
     "name": "nota",
@@ -25,11 +25,14 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "rxjs": "^5.5.5"
+    "rxjs": "^6.0.0"
   },
   "devDependencies": {
-    "rxjs": "^5.5.5",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.6.2"
+    "prettier": "^1.12.1",
+    "rxjs": "^6.0.0",
+    "rxjs-tslint": "^0.1.4",
+    "ts-node": "^6.0.3",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
   }
 }

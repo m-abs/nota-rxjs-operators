@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/operator/sample';
+import { interval, Observable } from 'rxjs';
+import { sample } from 'rxjs/operators';
 
 /**
  * Sample e.g. re-emit value every {intervalTime} ms
  */
-export function sampleInterval<T>(this: Observable<T>, intervalTime: number): Observable<T> {
-  return this.sample(Observable.interval(intervalTime));
-}
+export const sampleInterval = (intervalTime: number) => <T>(
+  source: Observable<T>,
+): Observable<T> => source.pipe(sample(interval(intervalTime)));
