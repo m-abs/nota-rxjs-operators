@@ -6,6 +6,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "prettier": "prettier --write --arrow-parens=always --tab-width 2 --trailing-comma all --single-quote src/**/*.ts"
   },
   "author": {

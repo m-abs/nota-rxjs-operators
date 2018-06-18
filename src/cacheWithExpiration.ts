@@ -1,7 +1,6 @@
 import {
   AsyncSubject,
   Observable,
-  Observer,
   throwError as observableThrowError,
   timer,
 } from 'rxjs';
