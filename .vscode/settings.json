@@ -9,5 +9,8 @@
     "lib": true,
     "dist": true,
     "package-lock.json": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
   }
 }

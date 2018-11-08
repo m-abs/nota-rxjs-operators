@@ -1,12 +1,10 @@
-import { Observable, throwError as observableThrowError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { delayWhen, retryWhen } from 'rxjs/operators';
 
 /**
  * Retry with delay, useful for HTTP requests that might fail temporarily
  */
-export const retryWithDelay = (maxRetries = 3, delay = 100) => <T>(
-  source: Observable<T>,
-): Observable<T> => {
+export const retryWithDelay = (maxRetries = 3, delay = 100) => <T>(source: Observable<T>) => {
   let retries = 0;
 
   return source.pipe(
@@ -15,10 +13,10 @@ export const retryWithDelay = (maxRetries = 3, delay = 100) => <T>(
         delayWhen((val) => {
           retries += 1;
           if (retries >= maxRetries) {
-            return observableThrowError(val);
+            return throwError(val);
           }
 
-          return observableThrowError(delay);
+          return throwError(delay);
         }),
       ),
     ),

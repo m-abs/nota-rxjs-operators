@@ -4,10 +4,7 @@ import { buffer, switchMap, take } from 'rxjs/operators';
 /**
  * Buffer the last {bufferCount} values while the pauser is true and emit them once it becomes false.
  */
-export const pausableBuffered = (
-  pauser: Observable<boolean>,
-  bufferCount?: number,
-) => <T>(source: Observable<T>) => {
+export const pausableBuffered = (pauser: Observable<boolean>, bufferCount?: number) => <T>(source: Observable<T>) => {
   const subject = new Subject();
 
   let tmp = source.pipe(buffer(pauser));

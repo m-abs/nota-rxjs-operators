@@ -5,6 +5,7 @@
     "target": "es6",
     "rootDir": "src/",
     "outDir": "lib/",
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "importHelpers": true
   }
 }
