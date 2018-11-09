@@ -1,4 +1,4 @@
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, timer } from 'rxjs';
 import { delayWhen, retryWhen } from 'rxjs/operators';
 
 /**
@@ -16,7 +16,7 @@ export const retryWithDelay = (maxRetries = 3, delay = 100) => <T>(source: Obser
             return throwError(val);
           }
 
-          return throwError(delay);
+          return timer(delay);
         }),
       ),
     ),

@@ -2,8 +2,8 @@
   "name": "@nota/rxjs-operators",
   "version": "0.1.0",
   "description": "A collection of operators for rxjs used by @nota",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "npm-run-all lint build:tsc",
     "build:tsc": "tsc -p ./tsconfig.json",
@@ -14,7 +14,8 @@
     "format": "prettier --write --config .prettierrc.json 'src/**/*.ts'",
     "format:check": "prettier-check --config .prettierrc.json 'src/**/*.ts'",
     "lint": "npm-run-all tslint format:check",
-    "mocha": "TS_NODE_FILES=true mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "TS_NODE_FILES=true mocha -r ts-node/register src/**/*.spec.ts",
+    "test:watch": "TS_NODE_FILES=true mocha -r ts-node/register -w --watch-extensions 'ts' src/**/*.spec.ts",
     "prepare": "npm run build",
     "tslint": "tslint -p ./tsconfig.json -c ./tslint.json"
   },
