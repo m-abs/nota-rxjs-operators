@@ -1,6 +1,7 @@
 {
   "rulesDirectory": [
-    "node_modules/rxjs-tslint"
+    "node_modules/rxjs-tslint",
+    "tslint-no-circular-imports"
   ],
   "rules": {
     "ordered-imports": true,

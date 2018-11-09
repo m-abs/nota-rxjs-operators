@@ -6,7 +6,10 @@ import { map, mergeAll } from 'rxjs/operators';
  */
 export const concurrentMerge = <O>(cb: (val: any) => Observable<O> | Promise<O>, concurrent?: number) => <T>(source: Observable<T>) => {
   return new Observable<O[]>((observer) => {
-    const worker = source.pipe(map((val: T, index: number) => defer(() => cb(val)).pipe(map((res) => ({ index, res })))), mergeAll(concurrent));
+    const worker = source.pipe(
+      map((val: T, index: number) => defer(() => cb(val)).pipe(map((res) => ({ index, res })))),
+      mergeAll(concurrent),
+    );
 
     const output = [] as Array<O>;
 
