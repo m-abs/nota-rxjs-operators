@@ -1,11 +1,11 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 /**
  * Take the current value of an observable.
  * Like .value on a BehaviorSubject.
  */
-export function getObservableValue<T>(observable: Observable<T> | BehaviorSubject<T>): T {
+export function getObservableValue<T>(observable: Observable<T>): T {
   if (observable instanceof BehaviorSubject) {
     return observable.value;
   }
