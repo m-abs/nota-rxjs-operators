@@ -12,5 +12,14 @@
   },
   "[typescript]": {
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": [
+    "Freiling",
+    "Morten",
+    "Sjøgren",
+    "mabs",
+    "pausable",
+    "prettierrc",
+    "tslib"
+  ]
 }
