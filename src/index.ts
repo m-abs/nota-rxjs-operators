@@ -5,4 +5,5 @@ export * from './getObservableValue';
 export * from './pausable';
 export * from './pausableBuffered';
 export * from './retryWithDelay';
+export * from './safeShareReplay';
 export * from './sampleInterval';
