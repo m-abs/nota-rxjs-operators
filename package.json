@@ -58,5 +58,8 @@
     "tslint": "^5.16.0",
     "tslint-no-circular-imports": "^0.6.2",
     "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "fast-deep-equal": "^2.0.1"
   }
 }

@@ -13,7 +13,7 @@ describe('retryWithDelay', () => {
   });
 
   it(
-    `Shouldn't prevent sucess w/o error`,
+    `Shouldn't prevent success w/o error`,
     fakeSchedulers(() => {
       const input = [1, 2, 3, 4, 5];
       const output = input.map((v) => v * 2);
@@ -30,7 +30,7 @@ describe('retryWithDelay', () => {
   );
 
   it(
-    `Shouldn't prevent sucess with temp error`,
+    `Shouldn't prevent success with temp error`,
     fakeSchedulers(() => {
       const input = [1, 2, 3, 4, 5];
       const output = input.map((v) => v * 2);
