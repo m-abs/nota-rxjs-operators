@@ -55,6 +55,22 @@ describe('distinctUntilDeepChanged', () => {
     bs.unsubscribe();
   });
 
+  it('Arrays', () => {
+    const values = [0, 1, 10, null, void 0, 'hugo', 'huba', 'hop'];
+
+    let numResults = 0;
+    const bs = new BehaviorSubject<any>(values);
+    bs.pipe(distinctUntilDeepChanged()).subscribe(() => (numResults += 1));
+
+    expect(numResults).be.equal(1);
+    bs.next([...values]);
+    expect(numResults).be.equal(1);
+    bs.next([...values, 1]);
+    expect(numResults).be.equal(2);
+
+    bs.unsubscribe();
+  });
+
   it('Primitives', () => {
     const values = [0, 1, 10, null, void 0, 'hugo', 'huba', 'hop'];
 
