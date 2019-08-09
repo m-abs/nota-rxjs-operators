@@ -9,4 +9,10 @@ describe('getObservableValue', () => {
 
     expect(getObservableValue(value$)).to.be.equal(value);
   });
+
+  it('No crash on invalid observable', () => {
+    const value$ = null;
+
+    expect(getObservableValue(value$)).to.be.undefined;
+  });
 });
