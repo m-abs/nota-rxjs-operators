@@ -20,10 +20,7 @@ describe('pausableBuffered', () => {
 
       let res: number;
       interval(100)
-        .pipe(
-          pausableBuffered(pauser$, 1),
-          take(3),
-        )
+        .pipe(pausableBuffered(pauser$, 1), take(3))
         .subscribe((i) => (res = i));
 
       clock.tick(10000);
@@ -40,10 +37,7 @@ describe('pausableBuffered', () => {
 
       let res: number;
       interval(100)
-        .pipe(
-          pausableBuffered(pauser$, 1),
-          take(3),
-        )
+        .pipe(pausableBuffered(pauser$, 1), take(3))
         .subscribe((i) => {
           res = i;
           pauser$.next(true);

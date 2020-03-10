@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 /**

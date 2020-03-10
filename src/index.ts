@@ -2,6 +2,7 @@ export * from './cacheWithExpiration';
 export * from './concurrentMerge';
 export * from './distinctUntilDeepChanged';
 export * from './getObservableValue';
+export * from './mapFromBoolean';
 export * from './pausable';
 export * from './pausableBuffered';
 export * from './retryWithDelay';
