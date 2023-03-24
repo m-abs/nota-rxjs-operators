@@ -7,5 +7,7 @@ import { map } from 'rxjs/operators';
  * @param trueValue
  * @param falseValue
  */
-export const mapFromBoolean = <T, T2>(trueValue: T, falseValue: T2) => (source: Observable<any>): Observable<T | T2> =>
-  source.pipe(map((input) => (input ? trueValue : falseValue)));
+export const mapFromBoolean =
+  <T, T2>(trueValue: T, falseValue: T2) =>
+  (source: Observable<any>): Observable<T | T2> =>
+    source.pipe(map((input) => (input ? trueValue : falseValue)));
